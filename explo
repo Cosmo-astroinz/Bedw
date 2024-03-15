@@ -1,0 +1,55 @@
+-- Architect BedWars Script (Enhanced with Features)
+-- Brown Theme with Movable and Smaller GUI
+
+local player = game.Players.LocalPlayer
+local gui = Instance.new("ScreenGui")
+gui.Name = "ArchitectBedWars"
+gui.Parent = player.PlayerGui
+
+local frame = Instance.new("Frame")
+frame.Size = UDim2.new(0, 150, 0, 100) -- Smaller size
+frame.Position = UDim2.new(0.5, -75, 0.5, -50)
+frame.BackgroundColor3 = Color3.fromRGB(139, 69, 19) -- Brown color
+frame.Active = true
+frame.Draggable = true -- Make it movable
+frame.Parent = gui
+
+-- Create a button to reveal exploit options
+local optionsButton = Instance.new("TextButton")
+optionsButton.Size = UDim2.new(0, 100, 0, 30)
+optionsButton.Position = UDim2.new(0.5, -50, 0, 10)
+optionsButton.BackgroundColor3 = Color3.fromRGB(205, 133, 63) -- Light brown color
+optionsButton.Text = "Exploit Options"
+optionsButton.FontSize = Enum.FontSize.Size18
+optionsButton.Parent = frame
+
+-- Create a container for exploit options (initially hidden)
+local optionsContainer = Instance.new("Frame")
+optionsContainer.Size = UDim2.new(1, 0, 0, 60)
+optionsContainer.Position = UDim2.new(0, 0, 1, 0)
+optionsContainer.BackgroundColor3 = Color3.fromRGB(205, 133, 63) -- Light brown color
+optionsContainer.Visible = false
+optionsContainer.Parent = frame
+
+-- Add exploit buttons to the container
+local function createExploitButton(text, yPos)
+    local button = Instance.new("TextButton")
+    button.Size = UDim2.new(1, 0, 0, 20)
+    button.Position = UDim2.new(0, 0, 0, yPos)
+    button.BackgroundColor3 = Color3.fromRGB(205, 92, 92) -- Red color
+    button.Text = text
+    button.FontSize = Enum.FontSize.Size14
+    button.Parent = optionsContainer
+    return button
+end
+
+createExploitButton("KillAura", 10)
+createExploitButton("Aimbot", 30)
+createExploitButton("ESP", 50)
+createExploitButton("Range", 70)
+createExploitButton("Infinite Fly", 90)
+
+-- Toggle options visibility when the button is clicked
+optionsButton.MouseButton1Click:Connect(function()
+    optionsContainer.Visible = not optionsContainer.Visible
+end)
